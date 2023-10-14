@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+header {
+    font-size: 160%;
+}
+
+body {
+    /* background-color: #9ecec3; */
+    font-family: "Poppins", sans-serif;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-right: 62px;
+    /* background: #9ecec3; */
+}
+
+.grid {
+    display: flex;
+    width: 100%;
+    grid-gap: 10px;
+    justify-content: left;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 28rem));
+    align-items: start;
+    height: auto;
+    padding: 2%;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    background: #e9e9e9;
+}
+
+.grid-item {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    /* overflow-x: scroll; */
+    box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: 0.2s;
+    min-width: 30em;
+    height: 70vh;
+    margin-right: 5%;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.grid-item:hover {
+    transform: translateY(-0.5%);
+    box-shadow: 0 4rem 8rem rgba(0, 0, 0, 0.5);
+}
+
+.card-img {
+    display: block;
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.card-content {
+    padding: 3rem;
+}
+
+.card-header {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #0d0d0d;
+    margin-bottom: 1.5rem;
+    max-height: 90px;
+    inline-size: 100%;
+    overflow-wrap: break-word;
+    overflow: hidden;
+}
+
+.card-text {
+    font-size: 1.6rem;
+    letter-spacing: 0.1rem;
+    line-height: 1.7;
+    color: #3d3d3d;
+    margin-bottom: 2.5rem;
+}
+
+.card-btn {
+    display: block;
+    width: 100%;
+    padding: 1.5rem;
+    font-size: 2rem;
+    text-align: center;
+    color: #3363ff;
+    background-color: #d8e0fd;
+    border: none;
+    border-radius: 0.4rem;
+    transition: 0.2s;
+    cursor: pointer;
+    letter-spacing: 0.1rem;
+    z-index: 1000;
+}
+
+.card-btn.two-lines {
+    transform: translateY(30px);
+}
+
+.card-btn span {
+    margin-left: 1rem;
+    transition: 0.2s;
+}
+
+.card-btn:hover, .card-btn:active {
+    background-color: #c3cffc;
+}
+
+.card-btn:hover span, .card-btn:active span {
+    margin-left: 1.5rem;
+}
+
+p {
+    font-size: 15px;
+}
+
+.add-listing {
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    border-width: 2px;
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    box-shadow: 0.5px 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.5);
+    
+}
+
+.add-listing:hover {
+    background-color: rgb(242, 254, 249);
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.flex-container {
+    display: flex;
+    margin: 0px; /* Add some margin to the flex container */
+    padding: 0px; /* Add some padding to the flex container */
+}
+
+.column1 {
+    flex: 2; /* Make the columns grow equally to take up available space */
+    display: flex; /* Nested flex container to center content vertically */
+    flex-direction: column; /* Stack content vertically within each column */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.column2 {
+    flex: 1; /* Make the columns grow equally to take up available space */
+    display: flex; /* Nested flex container to center content vertically */
+    flex-direction: column; /* Stack content vertically within each column */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.quote {
+    font-size: 350%; /*dont change this */
+    font-weight: 600;
+    background-image: linear-gradient(to left, #553c9a, #b393d3);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-align: center;
+
+  }
+
+.BestSelling {
+    font-size: 48px; /*dont change this */
+    font-weight: 600;
+    background-image: linear-gradient(to left, #553c9a, #b393d3);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+
+  }
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    border-radius: 10px;
+    max-width: 900px;
+  }
+
+
+.seemore:link, .seemore:visited, .seemore:active {
+    text-decoration: none;
+    color: black;
+}
+
+.seemore:hover {
+    color: #343434;
+}
+
+.seemore {
+    font-size: 15;
+}

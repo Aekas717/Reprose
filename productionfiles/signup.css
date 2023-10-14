@@ -1,0 +1,12 @@
+body {
+    margin: 0 auto;
+}
+
+.signupform input::placeholder {
+    text-align: center;
+}
+
+.signupform input::-ms-input-placeholder {
+    text-align: center;
+}
+

@@ -1,0 +1,104 @@
+body {
+    color: #073535b7;
+    padding-right: 5%;
+}
+
+.contents h1 {
+    font-size: 50px;
+    font-weight: 600;
+    background-image: linear-gradient(to left, #553c9a, #b393d3);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+
+.contents h2 {
+    font-size: 40px;
+    font-weight: 600;
+    background-image: linear-gradient(to left, #1dada6, #a0dad8);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+
+.contents ul {
+    padding-left: 5%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.contents ol {
+    padding-left: 5%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.image {
+  border-radius: 10px;
+  margin-left: auto;
+  max-width: 200px;
+  height: auto;
+}
+
+.meettheteam {
+  font-size: 48px; /*dont change this */
+  font-weight: 600;
+  background-image: linear-gradient(to left, #000, #000);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.team-section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.team-member {
+  text-align: center;
+  align-items: center;
+}
+
+.member-img {
+  margin: auto;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+/* Center the image within the circular container */
+}
+
+.card-img {
+  border-radius: 50%;
+  width: 100%;
+  height: auto;
+  display: block;
+  background-position: center center;
+}
+
+.member-details {
+  padding: 2rem;
+}
+
+.member-details h3 {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #0d0d0d;
+  margin-bottom: 0.5rem;
+  max-height: 90px;
+  max-width: 200px;
+  inline-size: 100%;
+  overflow-wrap: break-word;
+  overflow: hidden;
+}
+
+.member-details p {
+  font-size: 0.9 rem;
+  letter-spacing: 0.1rem;
+  line-height: 1.7;
+  max-width: 250px;
+  color: #3d3d3d;
+  margin-bottom: 2.5rem;
+}
