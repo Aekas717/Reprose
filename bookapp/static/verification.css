@@ -1,0 +1,91 @@
+body {
+    background: linear-gradient(120deg, #219ea5, #01ac84);
+    font-family: 'Poppins', sans-serif;
+}
+
+.verification-box {
+    background: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 50vh;
+    width: 40rem;
+    padding: 5% 2%;
+    border-radius: 10px;
+    box-shadow: 4px 4px 10px 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.verification-heading {
+    font-size: 1.7rem;
+    letter-spacing: 0.07rem;
+    margin-bottom: 0;
+}
+
+.verification-subheading, .verification-instructions {
+    font-size: 0.9rem;
+}
+
+.verification-instructions {
+    align-items: start;
+    margin-bottom: 2%;
+}
+
+.otp-inputs {
+    display: flex;
+    justify-content: space-between;
+    width: 420px;
+    margin-bottom: 7%;
+}
+
+.otp-inputs input {
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 5px;
+    background: #ece2fc;
+    opacity: 1.5;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.otp-inputs input:focus {
+    outline: none;
+}
+
+.no-otp {
+    text-align: center;
+    margin-bottom: 7%;
+}
+
+.resend-otp {
+    color: #14b2b5;
+    cursor: pointer;
+}
+
+.resend-otp:hover {
+    text-decoration: underline;
+}
+
+.otp-input input[type="submit"] {
+    background: linear-gradient(120deg, #219ea5, #01ac84);
+    margin-left: 8rem;
+    width: 10rem;
+    height: 2.5rem;
+    align-self: center;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 530;
+    letter-spacing: 0.07rem;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.otp-input input[type="submit"]:hover {
+    transform: scale(1.02);
+}
