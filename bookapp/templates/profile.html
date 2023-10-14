@@ -1,0 +1,140 @@
+{% extends "website_template.html" %}
+{% load static %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'profile.css' %}">
+  <script src="https://kit.fontawesome.com/c678a9bb70.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block content %}
+  <div class="side-navbar">
+    <div class="navbar-content active" id="user-details">
+      User Details
+    </div>
+    <div class="navbar-content" id="order-history" onclick="location.href='/order-history/'">
+      Order History
+    </div>
+    <div class="navbar-content" id="payment-methods" onclick="location.href='/payment-methods/'">
+      Payment Methods
+    </div>
+    <div class="navbar-content" id="subscriptions" onclick="location.href='/subscriptions/'">
+      Subscriptions
+    </div>
+  </div>
+  <div class="profile-content">
+    <div class="personal-details">
+      <img class="profile-image" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Profile Image">
+      <div class="name-location">
+        <h2 class="name">{{context.name}}</h2>
+        <p class="location"><ion-icon class="location-icon" name="location-outline"></ion-icon> Queenstown, Singapore</p>
+      </div>
+    </div>
+    <form class="user-details-form" method="post">
+      {% csrf_token %}
+      <div class="user-details">
+        <div class="user-detail-line">
+          <p class="detail-name">First name: </p>
+          <input name="firstname" class="detail-value" type="text" value="{{UserBio.firstname}}" readonly>
+        </div>
+        <div class="user-detail-line">
+          <p class="detail-name">Last name: </p>
+          <input name="lastname" class="detail-value" type="text" value="{{UserBio.lastname}}" readonly>
+        </div>
+        <div class="user-detail-line">
+          <p class="detail-name">Email: </p>
+          <input name="email" class="detail-value" type="text" value="{{UserBio.email_id}}" readonly>
+        </div>
+        <div class="user-detail-line">
+          <p class="detail-name">Password: </p>
+          <input name="password" class="detail-value" id="detail-password" type="password" value="{{UserBio.password}}" readonly>
+        </div>
+        <div class="user-detail-line">
+          <p class="detail-name">Address: </p>
+          <input name="address" class="detail-value" type="text" value="{{UserBio.address}}" readonly>
+        </div>
+        <button class="edit-btn" type="submit">Edit Details</button>
+      </div>
+    </form>
+  </div>
+  <div class="enter-password">
+    <h1 class="h1">Enter password to proceed</h1>
+      <div class="txt_field">
+        <input type="password" id="password" name="password" required>
+        <span></span>
+        <label class="password-label">Password</label>
+      </div>
+      <p class="incorrect-password"></p>
+      <input class="password-btn" type="submit" value="Confirm">
+  </div>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script>
+    let editBtn = document.querySelector('.edit-btn');
+    let editableFields = document.querySelectorAll('.detail-value');
+    let passwordBox = document.querySelector('.enter-password');
+    let passwordLabel = document.querySelector('.password-label');
+    let passwordBtn = document.querySelector('.password-btn');
+    var passwordInput = document.getElementById('password');
+    let password = "{{UserBio.password}}";
+    let incorrectPasswordMessage = document.querySelector('.incorrect-password');
+    let userDetailPassword = document.querySelector('#detail-password');
+    let userForm = document.querySelector('.user-details-form');
+    let clickOnBody = document.querySelector('body');
+    editMode = false;
+    passwordBoxOpen = false;
+
+    editBtn.addEventListener('click', function () {
+      event.stopPropagation();
+       if  (editMode) {
+        userDetailPassword.setAttribute('type', "password");
+        editableFields.forEach(function(element){
+          element.setAttribute('readonly', true);
+          element.classList.remove('active');
+        });
+        editBtn.innerHTML = "Edit Details"
+        editMode = false;
+       } else {
+        event.preventDefault();
+        passwordBox.classList.add('active');
+        passwordLabel.classList.add('active');
+        passwordBoxOpen = true;
+       }
+    });
+
+    passwordBtn.addEventListener('click', function() {
+      if (passwordInput.value == password){
+        passwordBox.classList.remove('active');
+        passwordLabel.classList.remove('active');
+        userDetailPassword.setAttribute('type', "text");
+        passwordInput.value = "";
+        editableFields.forEach(function(element){
+          element.removeAttribute('readonly');
+          element.classList.add('active');
+        });
+        editBtn.setAttribute('name', "saveBtn");
+        editBtn.setAttribute('value', "save");
+        editBtn.innerHTML = "Save Changes"
+        editMode = true;
+        passwordBoxOpen = false;
+      } else {
+        incorrectPasswordMessage.innerHTML = "Password is incorrect"
+      }
+    });
+
+    clickOnBody.addEventListener('click', function(){
+      if (passwordBoxOpen == true){
+        passwordBox.classList.remove('active');
+        passwordLabel.classList.remove('active');
+      }
+    });
+
+    passwordBox.addEventListener('click', function(){
+      event.stopPropagation();
+    });
+  </script>
+{% endblock %}
+

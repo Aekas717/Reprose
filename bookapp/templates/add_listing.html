@@ -1,0 +1,90 @@
+{% extends "website_template.html" %}
+{% load static %}
+
+{% block title %}
+    Add Listing
+{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'addListingForm.css' %}">
+
+    <script>
+        function OpsLending() {
+            var selection = document.querySelector("#listingType");
+            console.log(selection.value);
+
+            if (selection.value == "Borrowing") {
+                var element = document.getElementById("priceLabel");
+                element.style.display = "none";
+                var element = document.getElementById("price");
+                element.removeAttribute('required');
+                var element = document.getElementById("org");
+                element.style.display = "initial";                              
+            } else if (selection.value == "Selling") {
+                var element = document.getElementById("priceLabel");
+                element.style.display = "inherit"; 
+                var element = document.getElementById("org");
+                element.style.display = "hide";
+            }
+
+        }
+
+        function OpdHide() {
+            var element = document.getElementById("org");
+            element.style.display = "none";  
+        }
+
+        window.onload = OpdHide;
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="center" style="align-items: center;">
+        <h1> Create Listing </h1>
+        <form method="post" action="#" class="signupform">
+            {% csrf_token %}
+
+            <div class="txt_field">
+                <input type="text" id="isbn" name="isbn" required>
+                <span></span>
+                <label>ISBN Number</label>
+            </div>
+ 
+            <select class="dropdown" id="listingType" name="listingType" onchange="OpsLending()" required>
+                <option value="">Listing type</option>
+                <option id="Selling" value="For Sale">For Sale</option>
+                <option id="borrow" value="To Borrow">For Lending</option>
+            </select>
+
+            <div class="txt_field" id="priceLabel">
+                <input type="number" id="price" name="price" min="0" required>
+                <span></span>
+                <label>Price</label>
+            </div>
+
+            <div id="org">
+                <br>  <br>
+            </div>
+
+            <select class="dropdown" id="condition" name="condition" required>
+                <option value="">Condition</option>
+                <option value="Brand New">Brand New</option>
+                <option value="Like new">Used - Like New</option>
+                <option value="Slight Wear">Used - Slight Wear</option>
+                <option value="Worn Out">Used - Worn Out</option>
+            </select>
+                
+            <input type="submit" value="Add listing" class="addlisting">
+        </form>
+    </div>
+    <script>
+        let saleBtn = document.querySelector('#listingType')
+        let priceBox = document.querySelector('#price');
+        let priceLabel = document.querySelector('#priceLabel');
+
+        if (saleBtn.value == "Sale"){
+            //priceLabel.removeAttribute("hidden");
+            priceLabel.setAttribute("hidden");
+        }
+        
+    </script>
+{% endblock %}

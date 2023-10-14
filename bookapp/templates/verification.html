@@ -1,0 +1,51 @@
+{% load static %}
+<html>
+    <head>
+        <title>Verification</title>
+        <link rel="stylesheet" href="{% static 'verification.css' %}">
+    </head>
+    <body>
+        <div class="verification-box">
+            <h3 class="verification-heading">OTP Verification</h3>
+            <p class="verification-subheading">Enter the verification code sent to</p>
+            <form class="otp-input" action="#" method="post">
+                {% csrf_token %}
+                <p class="verification-instructions">Type the 6-digit security code</p>
+                <div class="otp-inputs">
+                    <input type="text" id="input1" name="otp1" maxlength="1">
+                    <input type="text" id="input2" name="otp2" maxlength="1">
+                    <input type="text" id="input3" name="otp3" maxlength="1">
+                    <input type="text" id="input4" name="otp4" maxlength="1">
+                    <input type="text" id="input5" name="otp5" maxlength="1">
+                    <input type="text" id="input6" name="otp6" maxlength="1">
+                </div>
+                <p class="error-message">{{error_message}}</p>
+                <p class="no-otp">Didnt get an otp? <a class="resend-otp">Resend OTP</a></p>
+                <input type="submit" value="Verify">
+            </form>
+        </div>
+        <script>
+            const inputs = [
+                document.getElementById('input1'),
+                document.getElementById('input2'),
+                document.getElementById('input3'),
+                document.getElementById('input4'),
+                document.getElementById('input5'),
+                document.getElementById('input6')
+            ];
+
+            // Add input event listeners to each input
+            inputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    const currentInput = e.target;
+                    
+                    // If the current input has a value and it's not the last input
+                    if (currentInput.value && index < inputs.length - 1) {
+                        // Move focus to the next input
+                        inputs[index + 1].focus();
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

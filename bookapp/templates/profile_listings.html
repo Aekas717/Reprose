@@ -1,0 +1,63 @@
+{% extends "website_template.html" %}
+{% load static %}
+
+{% block title %}
+    My Listings
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'cart.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<!-- <div class="listing">
+    <h2>Your Listings</h2>
+    {% for listing in context.listings %}
+    <div class="listing-item">
+      <span>{{ listing.book_title }}</span>
+      <form method="POST" action="{% url 'remove_listing'%}">
+        {% csrf_token %}
+        <button type = "submit" value = "{{ listing.id }}" name = "remove_listing">
+            <i class="fa-solid fa-trash"></i>
+        </button>
+      </form>
+    </div>
+    {% endfor %}
+  </div> -->
+
+<p class="error-message">{{context.error_message}}</p>
+    <div class="cart-container">
+        <h1 class="cart-header">Your Listings</h1>
+        <div class="cart-subheader">
+            <h5 class="subheader-main">Item</h5>
+            <h5 class="subheader-text">ISBN</h5>
+            <h5 class="subheader-text">Condition</h5>
+            <h5 class="subheader-text">Sale/Borrow</h5>
+            <h5 class="subheader-text">Price</h5>
+        </div>
+        {% for listing in context.listings %}
+            <div class="cart-item">
+                <div class="item-main" onclick="location.href='/bookinfo/{{listing.id}}'">
+                    <img class="item-img" src="{{listing.imgurl}}" alt="Book image">
+                    <div class="item-title">{{listing.book_title}}</div>
+                </div>
+                <div class="item-sub">{{listing.isbn}}</div>
+                <div class="item-sub">{{listing.condition}}</div>
+                <div class="item-sub">{{listing.saleOrBorrow}}</div>
+                <div class="item-sub">S${{listing.price}}</div>
+                <form method="POST" action="{% url 'remove_listing'%}" class="item-cross">
+                  {% csrf_token %}
+                  <button class="item-cross" type="submit" value = "{{ listing.id }}" name = "remove_listing">
+                      <i class="fa-solid fa-trash"></i>
+                  </button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://kit.fontawesome.com/cff990d279.js" crossorigin="anonymous"></script>
+{% endblock %}

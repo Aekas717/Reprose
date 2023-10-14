@@ -1,0 +1,58 @@
+{% extends "website_template.html" %}
+{% load static %}
+
+{% block title %}
+    Reprose - {{bookdata.book_title}}
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'product_page.css' %}">    
+    <style>
+        .backtoresults:hover {
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+<!-- <p>The id is {{id}}</p> -->
+
+<section>
+    <a href="javascript:history.go(-1)" class="backtoresults"> &lt Back to Results</a>
+    <br>
+    <br>
+
+
+    <div class="flex" style="justify-content: center;">
+        <div class="left">
+            <div class="main_img">
+                <img src="{{bookdata.imgurl}}" alt="Image here" class="slide">
+            </div>
+        </div>
+        <div class="right">
+
+            <h3> {{bookdata.book_title}} </h3>
+            <br>
+            <h4><small>S$</small>{{bookdata.price}}</h4>
+            <p>{{bookdata.description}}</p>
+            
+            <hr>
+            <br>
+            <form method="post" action="/cart/">
+                {% csrf_token %}
+                <div class="button">
+                    <button class="addtocard" type="submit" name="addFromBookPage" value="{{bookdata.id}}" onclick="location.href='/cart/'">Add to Cart</button>
+                </div>
+            </form> 
+        </div>
+
+    </div>
+
+    
+
+</section>
+
+<script>
+</script>
+{% endblock %}

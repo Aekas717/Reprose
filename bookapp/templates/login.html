@@ -1,0 +1,35 @@
+{% extends "website_template.html" %}
+{% load static %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+{% endblock %}
+{% block content %}
+<div class="center">
+    <h1> Login </h1>
+    <form method="POST" action="#" class="signupform">
+        {% csrf_token %}
+
+        <p style="color: red;" align="center">{{ context.error_message }}</p>
+        <div class="txt_field">
+            <input type="text" id="email" name="email" required>
+            <span></span>
+            <label>Email Address</label>
+        </div>
+        <div class="txt_field">
+            <input type="password" id="password" name="password" required>
+            <span></span>
+            <label>Password</label>
+        </div>
+        <div class="pass"><a href="/forgotPassword">Forgot password?</a></div>
+        <input type="submit" value="Login">
+        <div class="signup_link">
+            Not a member? <a href="/signup">Signup</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "website_template.html" %}
+
+{% block title %}
+    Contact Us
+{% endblock %}
+
+{% block head %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'contact.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="center">
+        <h1> Contact Us </h1>
+        <form method="POST" action="#" class="contactform">
+            {% csrf_token %}
+
+
+            {% if not context.logged_in %}
+            <p style="color: red;" align="center">{{ context.error_message }}</p>
+            <div class="txt_field">
+                <input type="text" id="fname" name="firstname" required>
+                <span></span>
+                <label>First name</label>
+            </div>
+        
+            <div class="txt_field">
+                <input type="text" id="email" name="email" required>
+                <span></span>
+                <label>Email Address</label>
+            </div>
+
+            {% else %}
+            <p> Send us a query through this form</p>
+            {% endif %}
+
+            <div class="query_field">
+                <textarea type="text" id="query" name="query" style="height: 150px;" placeholder="Your Query"></textarea>
+                <span></span>
+                
+            </div>
+
+            <input type="submit" value="Send your question">
+        </form>
+    </div>
+        
+
+{% endblock %}
+

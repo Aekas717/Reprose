@@ -1,0 +1,44 @@
+{% extends "website_template.html" %}
+{% load static %}
+
+{% block title %}
+    Cart
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'cart.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<p class="error-message">{{context.error_message}}</p>
+    <div class="cart-container">
+        <h1 class="cart-header">Cart</h1>
+        <div class="cart-subheader">
+            <h5 class="subheader-main">Item</h5>
+            <h5 class="subheader-text">ISBN</h5>
+            <h5 class="subheader-text">Condition</h5>
+            <h5 class="subheader-text">Sale/Borrow</h5>
+            <h5 class="subheader-text">Price</h5>
+        </div>
+        {% for cart_item in listings %}
+            <div class="cart-item">
+                <div class="item-main" onclick="location.href='/bookinfo/{{cart_item.id}}'">
+                    <img class="item-img" src="{{cart_item.imgurl}}" alt="Book image">
+                    <div class="item-title">{{cart_item.book_title}}</div>
+                </div>
+                <div class="item-sub">{{cart_item.isbn}}</div>
+                <div class="item-sub">{{cart_item.condition}}</div>
+                <div class="item-sub">{{cart_item.saleOrBorrow}}</div>
+                <div class="item-sub">S${{cart_item.price}}</div>
+                <form method="post" action="/cart/" class="item-cross">
+                    {% csrf_token %}
+                    <button class="item-cross" type="submit" name="delete_button" value="{{cart_item.id}}"><ion-icon name="close-circle-outline"></ion-icon></button>
+                </form>
+            </div>
+        {% endfor %}
+        <button class="checkout-btn" onclick="location.href='checkout/{{userid}}'">Proceed to Checkout</button>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "website_template.html" %}
+{% load static %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'profile.css' %}">
+  <script src="https://kit.fontawesome.com/c678a9bb70.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block content %}
+  <div class="side-navbar">
+    <div class="navbar-content" id="user-details" onclick="location.href='/profile/'">
+      User Details
+    </div>
+    <div class="navbar-content active" id="order-history">
+      Order History
+    </div>
+    <div class="navbar-content" id="payment-methods" onclick="location.href='/payment-methods/'">
+      Payment Methods
+    </div>
+    <div class="navbar-content" id="subscriptions" onclick="location.href='/subscriptions/'">
+      Subscriptions
+    </div>
+  </div>
+  <div class="profile-content">
+    {% for order, orderid, price, date in alldata %}
+        <div class="order-card">
+            <div class="order-card-header">
+                <div class="order-placed">
+                    <p class="order-heading">Order Placed</p>
+                    <p class="order-subheading">{{date}}</p>
+                </div>
+                <div class="order-total">
+                    <p class="order-heading">Total</p>
+                    <p class="order-subheading">S${{price}}</p>
+                </div>
+                <div class="order-number">
+                    <p class="order-heading">Order ID</p>
+                    <p class="order-subheading">#{{orderid}}</p>
+                </div>
+            </div>
+            {% for order_item in order %}
+                <div class="order-item">
+                    <h2 class="order-delivered">Delivered 30 July 2023</h2>
+                    <div class="order-item-content">
+                        <div class="main-content">
+                            <img class="item-image" src="{{order_item.imgurl}}" alt="book">
+                            <div class="item-description">
+                                <p class="book-title" onclick="location.href='/bookinfo/{{order_item.id}}'">{{order_item.book_title}}</p>
+                                <p class="book-seller">{{order_item.userid}}</p>
+                            </div>
+                        </div>
+                        <button class="review-button">Write a review</button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+  </div>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script>
+    
+  </script>
+{% endblock %}
+

@@ -1,0 +1,145 @@
+{% extends "website_template.html" %}
+{% load static %}
+
+{% block title %}
+    Sign Up
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <div class="center">
+        <h1> Sign Up </h1>
+        <form method="POST" action="#" class="signupform">
+            {% csrf_token %}
+        
+            <p style="color: red;" align="center" id="error_message">{{ context.error_message }}</p>
+            <div class="txt_field">
+                <input type="text" id="fname" name="firstname" required>
+                <span></span>
+                <label>First name</label>
+            </div>
+        
+            <div class="txt_field">
+                <input type="text" id="lname" name="lastname"required>
+                <span></span>
+                <label>Last name</label>
+            </div>
+        
+            <div class="txt_field">
+                <input type="text" id="email" name="email" required>
+                <span></span>
+                <label>Email Address</label>
+            </div>
+        
+            <div class="txt_field">
+                <input type="password" id="password_1" name="password_1" required>
+                <span></span>
+                <label>Create Password</label>
+            </div>
+        
+            <div class="txt_field">
+                <input type="password" id="password_2" name="password_2" required>
+                <span></span>
+                <label>Confirm Password</label>
+            </div>
+            <p id="password-strength" hidden></p>
+            <input id="signupBtn" type="submit" value="Sign up">
+            <div class="signup_link">
+                Already registered? <a href="/login">Login</a>
+            </div>
+        </form>
+    </div>
+    <script>
+        var passwordInput = document.getElementById('password_1');
+        var passwordConfirm = document.getElementById('password_2');
+        var emailInput = document.getElementById('email');
+        let passwordStrength = document.getElementById("password-strength");
+        let signupBtn = document.getElementById("signupBtn");
+        let errorMessage = document.getElementById("error_message");
+
+        passwordInput.addEventListener('input', () => {
+            console.log('change')
+            var password = passwordInput.value;
+            var strength = checkPasswordStrength(password);
+            displayPasswordStrength(strength);
+            
+        });
+
+        signupBtn.addEventListener('click', function(event) {
+            if (passwordStrength.textContent == "Weak" || passwordStrength.textContent == "Moderate") {
+                event.preventDefault()
+                errorMessage.innerHTML = "Password too weak"
+            } 
+            
+            if (passwordInput.value != passwordConfirm.value) {
+                event.preventDefault()
+                errorMessage.innerHTML = "Passwords do not match"
+            }
+
+            if (!ValidateEmail(emailInput)) {
+                event.preventDefault()
+                errorMessage.innerHTML = "Enter valid email id"
+            }
+
+        });
+
+        function checkPasswordStrength(password) {
+            // Define your criteria here
+            const minLength = 8;
+            const hasUppercase = /[A-Z]/.test(password);
+            const hasLowercase = /[a-z]/.test(password);
+            const hasNumber = /\d/.test(password);
+            const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password);
+
+            let strength = 0;
+
+            if (password.length >= minLength) {
+                strength += 1;
+            }
+            if (hasUppercase) {
+                strength += 1;
+            }
+            if (hasLowercase) {
+                strength += 1;
+            }
+            if (hasNumber) {
+                strength += 1;
+            }
+            if (hasSpecialChar) {
+                strength += 1;
+            }
+            console.log(strength)
+            return strength;
+        }
+
+        function displayPasswordStrength(strength) {
+            let message = '';
+            if (strength <= 1) {
+                message = 'Weak';
+            } else if (strength <= 3) {
+                message = 'Moderate';
+            } else if (strength == 4) {
+                message = 'Strong';
+            } else {
+                message = 'Very Strong'
+            }
+            console.log(message)
+            passwordStrength.innerHTML = message;
+        }
+
+        function ValidateEmail(input) {
+            var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            if (input.value.match(validRegex)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
+    </script>
+{% endblock %}

@@ -1,0 +1,157 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'payment.css' %}">
+    <title>Payment Page</title>
+</head>
+<body>
+    <div class="payment-box">
+        <div class="payment-header">
+            <div class="org-name">
+                Reprose pte. ltd.
+            </div>
+            <div class="payment-amount">
+                <small>Total</small> SGD {{total_price}}
+            </div>
+        </div>
+        <div class="payment-accept">
+            <div class="accept-txt">
+                Payment
+            </div>
+            <div class="accept-icon">
+                <i class="fa-brands fa-cc-visa"></i>
+                <i class="fa-brands fa-cc-mastercard"></i>
+                <i class="fa-brands fa-cc-amex"></i>
+                <i class="fa-regular fa-credit-card"></i>
+            </div>
+        </div>
+        <form method="post" class="payment-form" action="/payment/{{userid}}">
+            {% csrf_token %}
+            <input name="card_name" type="text" class="input-reg" placeholder="Name on Card*" required>
+            <input name="card_number" id="card_number" type="text" class="input-reg" placeholder="Card Number*" required>
+            <div class="date-cvv">
+                <input name="card_expiry" type="month" class="input-half" placeholder="Expiry Date*" required>
+                <input name="card_cvv" type="text" class="input-half" placeholder="Security Code*" required>
+            </div>
+            <input type="submit" value="Pay" class="input-pay" placeholder="Name on Card*">
+        </form>
+    </div>
+    <script src="https://kit.fontawesome.com/cff990d279.js" crossorigin="anonymous"></script>
+    <script>
+        var cardNumber = document.getElementById('card_number');
+    </script>
+</body>
+</html>
+<!--This is the LUHN's Algorithm to verify if the card number is true-->
+<!--const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+function main() {
+  rl.question('What is your credit card number? ', (input) => {
+    const n = BigInt(input);
+    let credit = n;
+    let counter = 0;
+
+    while (n != 0n) {
+      n /= 10n;
+      counter++;
+    }
+
+    if (counter != 13 && counter != 15 && counter != 16) {
+      console.log("INVALID");
+      process.exit(1);
+    }
+
+    const array = new Array(counter);
+
+    for (let i = 0; i < counter; i++) {
+      array[i] = Number(credit % 10n);
+      credit /= 10n;
+    }
+
+    const first_dig = array[counter - 1];
+    const second_dig = array[counter - 2];
+
+    if (first_dig < 3 || first_dig > 5) {
+      console.log("INVALID");
+      process.exit(1);
+    }
+
+    if (first_dig === 3) {
+      if (second_dig !== 4 && second_dig !== 7) {
+        console.log("INVALID");
+        process.exit(1);
+      }
+    } else if (first_dig === 5) {
+      if (![1, 2, 3, 4, 5].includes(second_dig)) {
+        console.log("INVALID");
+        process.exit(1);
+      }
+    }
+
+    for (let i = 1; i < counter; i += 2) {
+      array[i] *= 2;
+    }
+
+    let sum = 0;
+    for (let i = 0; i < counter; i++) {
+      sum += array[i];
+      if (array[i] >= 10) {
+        sum -= 9;
+      }
+    }
+
+    if (sum % 10 === 0) {
+      if (first_dig === 3) {
+        console.log("AMEX");
+      } else if (first_dig === 4) {
+        console.log("VISA");
+      } else if (first_dig === 5) {
+        console.log("MASTERCARD");
+      }
+    }
+    rl.close();
+  });
+}
+
+main();
+-->
+
+
+
+<!--
+<div class="center">
+    <h1> Make payment </h1>
+    <form method="POST" action="#" class="signupform">
+
+        <div class="txt_field">
+            <input type="text" id="card-name" name="card-name" required>
+            <span></span>
+            <label>Name on card</label>
+        </div>
+        <div class="txt_field">
+            <input type="number" id="card-number" name="card-number" minlength ="13" maxlength="16" required>
+            <span></span>
+            <label>Card number</label>
+        </div>
+        <div class="txt_field">
+            <input class = "date" type="month" id="Expiration-Date" name="Expiration-Date" required>
+            <span></span>
+            <label>Expiration Date</label>
+        </div>
+        <div class="txt_field">
+            <input type="password" id="cvv" name="cvv" maxlength="3" required>
+            <span></span>
+            <label>CVV</label>
+        </div>
+
+        <input type="submit" value="Pay" onclick="location.href='/'">
+
+    </form>
+</div>

@@ -1,0 +1,256 @@
+{% extends "website_template.html" %}
+{% load static %}
+
+{% block title %}
+    Browse
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'listings.css' %}">
+{% endblock %}
+
+{% block content %}
+{% csrf_token %}
+    <div class="sub-header">
+        <div class="left">
+            <button class="category-btn">
+                <ion-icon name="list-outline"></ion-icon>
+            </button>
+            <button {{context.isnothidden}} class="add-listing" onclick="location.href='/listing/add'">
+                &#43 Create Listing
+            </button>
+            <br>
+            <p {{context.madequery}}> {{context.numberOfResults}} result{{context.s}} {{context.query}}</p>
+            <br>
+            <!-- Sample book db - remove later -->
+
+            <h1 {{context.noResults}}>No matches found for "{{context.query}}"</h1>
+        </div>
+        <div class="right">
+            <div class="filter-btn">
+                <ion-icon name="filter-outline" class="filter-icon"></ion-icon>&nbsp&nbspFilter
+            </div>
+            <div class="sort-btn">
+                <ion-icon name="filter-outline" class="filter-icon"></ion-icon>&nbsp&nbspSort By
+            </div>
+        </div>
+    </div>
+    <!-- grid of book listings -->
+    <div class = 'grid'>
+        {% for book in context.listings %}
+            
+                <div id="box" class="grid-item" onclick="location.href='/bookinfo/'+'{{book.id}}'">
+                    <div class="card">
+                        <img class="card-img" src="{{book.imgurl}}" alt="book {{book.id}}">
+                        <div class="card-content">
+                            <h1 class="card-header"> {{book.book_title}} </h1>
+                            <p class="card-text">
+                                {{book.saleOrBorrow}}
+                                <br>
+                                {{book.condition}}
+                                <br>
+                                S${{book.price}}
+                            </p>
+                            <div class="buttonform">
+                                <form method="post" action="/cart/">
+                                    {% csrf_token %}
+                                    <button type="submit" id="btn" class="card-btn" name="addToCart_button" value="{{book.id}}"; event.preventDefault(); event.stopPropagation();>
+                                        Add to Cart <span>&rarr;</span>
+                                    </button>
+                                </form> 
+                            </div>
+ 
+                        </div>
+                    </div>
+                </div>
+                
+            {% endfor %}
+    </div>
+    <div class="categories-sidebar">
+        <div class="category-title">
+            <div class="left-title">Hello, {{context.name}} </div>
+            <div class="right-title">
+                <ion-icon class="close-sidebar-btn" name="close-outline"></ion-icon>
+            </div>
+        </div>
+        <div class="category">
+            <div class="categories-list-header">Trending</div>
+            <div class="categories-list-item">Reprose Recommended</div>
+            <div class="categories-list-item">Best Sellers</div>
+            <div class="categories-list-item">New Releases</div>
+        </div>
+        <div class="category">
+            <div class="categories-list-header">Shop by Category</div>
+            <div class="categories-list-item">Educational</div>
+            <div class="categories-list-item">Comics and Graphic novels</div>
+            <div class="categories-list-item">Fantasy</div>
+            <div class="categories-list-item">Kids</div>
+        </div>
+        <div class="category">
+            <div class="categories-list-header">Shop Education</div>
+            <div class="categories-list-education">
+                <div class="categories-list-education-left">
+                    Grade
+                </div>
+                <div class="categories-list-education-right">
+                    &#9654
+                </div>
+            </div>
+            <div class="categories-list-education">
+                <div class="categories-list-education-left">
+                    Subject
+                </div>
+                <div class="categories-list-education-right">
+                    &#9654 <!--&#9660--->
+                </div>
+            </div>
+        </div>
+    </div>
+    <form method="post" action="#">
+        {% csrf_token %}
+        <div class="filter-box">
+            <div class="close-filter-btn">
+                <ion-icon name="close-outline"></ion-icon>
+            </div>
+            <div class="filter-item">
+                <label class="heading">Price</label>
+                    <div class="price-range">
+                        <div class="txt_field">
+                            <input type="number" id="minprice" name="minprice">
+                            <span></span>
+                            <label>Minimum price</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="number" id="maxprice" name="maxprice">
+                            <span></span>
+                            <label>Maximum price</label>
+                        </div>
+                    </div>
+            </div>
+            <div class="filter-item">
+                <label class="heading">Condition</label>
+                <div class="radio">
+                    <div class="radio-option">
+                        <input class="radio-input" type="radio" id="Brand_New" name="condition" value="Brand_New">
+                        <label class="radio-label" for="Brand_New">Brand New</label><br>
+                    </div>
+                    <div class="radio-option">
+                        <input class="radio-input" type="radio" id="Like_New" name="condition" value="Like_New">
+                        <label class="radio-label" for="Like_New">Like New</label><br>
+                    </div>
+                    <div class="radio-option">
+                        <input class="radio-input" type="radio" id="Slight_Wear" name="condition" value="Slight_Wear">
+                        <label class="radio-label" for="Slight_Wear">Slight Wear</label><br>
+                    </div>
+                    <div class="radio-option">
+                        <input class="radio-input" type="radio" id="Worn_Out" name="condition" value="Worn_Out">
+                        <label class="radio-label" for="Worn_Out">Worn Out</label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-item">
+                <label class="heading">Genre</label>
+                <div class="radio">
+                    <div class="radio-option">
+                        <input class="radio-input" type="radio" id="Fiction" name="genre" value="Fiction">
+                        <label class="radio-label" for="Fiction">Fiction</label><br>
+                    </div>
+                    <div class="radio-option">
+                        <input class="radio-input" type="radio" id="Educational" name="genre" value="Educational">
+                        <label class="radio-label" for="Educational">Educational</label><br>
+                    </div>
+                    <div class="radio-option">
+                        <input class="radio-input" type="radio" id="Adventure" name="genre" value="Adventure">
+                        <label class="radio-label" for="Adventure">Adventure</label><br>
+                    </div>
+                    <div class="radio-option">
+                        <input class="radio-input" type="radio" id="Non-Fiction" name="genre" value="Non-Fiction">
+                        <label class="radio-label" for="Non-Fiction">Non-Fiction</label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-item">
+                <label class="heading">Age group</label>
+                <div class="radio">
+                    <div class="radio-option">
+                        <input class="radio-input" type="radio" id="13" name="age_group" value="13">
+                        <label class="radio-label" for="13">13 years</label><br>
+                    </div>
+                    <div class="radio-option">
+                        <input class="radio-input" type="radio" id="18" name="age_group" value="18">
+                        <label class="radio-label" for="18">18 years</label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-item">
+                <label class="heading">Sale or Borrowing</label>
+                <div class="radio">
+                    <div class="radio-option">
+                        <input class="radio-input" type="radio" id="Selling" name="saleLend" value="For Sale">
+                        <label class="radio-label" for="Selling">For Sale</label><br>
+                    </div>
+                    <div class="radio-option">
+                        <input class="radio-input" type="radio" id="Borrowing" name="saleLend" value="To Borrow">
+                        <label class="radio-label" for="Borrowing">For Borrowing</label><br>
+                    </div>
+                </div>
+            </div>
+            <button class="search-with-filter-btn" type="submit" name="filter_search" value="filter_search">Search</button>
+        </div>
+    </form>
+    <script>
+        let filterBtn = document.querySelector('.filter-btn');
+        let closefilterBtn = document.querySelector('.close-filter-btn');
+        let fliterBox = document.querySelector('.filter-box');
+        let webpage = document.querySelector('body');
+
+        filterBtn.onmousedown = function(){
+            fliterBox.classList.add('active');
+            webpage.classList.add('inactive');
+            document.body.style.overflow = 'hidden';
+            categorySidebar.classList.remove('active');
+        }
+
+        closefilterBtn.onclick = function(){
+            fliterBox.classList.remove('active');
+            webpage.classList.remove('inactive');
+            document.body.style.overflow = 'scroll';
+            
+        }
+
+        let categoryBtn = document.querySelector('.category-btn');
+        let categorySidebar = document.querySelector('.categories-sidebar');
+        let closeCategory = document.querySelector('.close-sidebar-btn');
+
+        categoryBtn.onclick = function(){
+            categorySidebar.classList.add('active');
+            webpage.classList.add('inactive');
+            document.body.style.overflow = 'hidden';
+            fliterBox.classList.remove('active');
+        }
+
+        closeCategory.onclick = function(){
+            categorySidebar.classList.remove('active');
+            webpage.classList.remove('inactive');
+            document.body.style.overflow = 'scroll';
+        }
+
+        let dropdownBtn = document.querySelector('.categories-list-education-left');
+        let dropIcon = document.querySelector('.categories-list-education-right')
+        isOpen = false;
+        dropdownBtn.onclick = function(){
+            if (isOpen){
+                dropIcon.classList.remove('open');
+                isOpen = false;
+            } else {
+                dropIcon.classList.add('open');
+                isOpen = true
+            }
+            
+        }
+
+
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+{% endblock %}

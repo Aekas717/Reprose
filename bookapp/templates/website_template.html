@@ -1,0 +1,112 @@
+{% load static %}
+<html>
+    <head>
+        <title>
+            {% block title %} {% endblock %}
+        </title>
+            <link rel="stylesheet" href="{% static 'website_design.css' %}">
+            <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" >
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+            <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+            
+        {% block head %}{% endblock %}
+    </head>
+    <body style="margin-left: 50px;">
+        <header>
+            <a href="/" class="logo">Reprose</a>
+            <div class="group">
+                <ul class="navigation">
+                    <li ><a href="/">Home</a></li>
+                    <li><a href="/listing">Browse</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li {{context.ishidden }}><a href="/login">Login</a></li>
+                    <li {{context.ishidden}}><a href="/signup">Sign Up</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li {{context.isnothidden}} id="cart-btn"><a href="/cart"><i class="fa fa-shopping-cart"></i></a></li>
+                </ul>
+                
+                <div class="search">
+                    <span class="icon">
+                        <ion-icon name="search-outline" class="searchBtn"></ion-icon>
+                        <ion-icon name="close-outline" class="closeBtn"></ion-icon>
+                    </span>
+                </div>
+                <div {{context.isnothidden}} class="profile">
+                    <img class="profile-img" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Profile Image" width="30px" height="30px">
+                </div>
+            </div>
+            <div class="searchBox">
+                <form method="post" action="/listing/">
+                    {% csrf_token %}
+                    <input type="text" name="query" placeholder="Search...">
+                </form>
+            </div>
+        </header>
+        <div class="profile-dropdown">
+            <ul class="profile-list">
+                <div class="item-list">
+                    <li class="profile-list-heading"> {{ context.name }}</li>
+                </div>
+                <div class="item-list">
+                    <li class="profile-list-item"><a class="link" href="/profile/">View Profile</a></li>
+                    <div class="">&gt</div>
+                </div>
+                <div class="item-list">
+                    <li class="profile-list-item"><a class="link" href="/profile/listings/">Manage Listings</a></li>
+                    <div class="">&gt</div>
+                </div>
+                <div class="item-list">
+                    <li class="profile-list-item"><a class="link" href="/cart/">View Cart</a></li>
+                    <div class="">&gt</div>
+                </div>
+                <div class="item-list">
+                    <li class="profile-list-item"><a class="link" href="/signout/">Signout</a></li>
+                    <div class="list-right">&gt</div>
+                </div>
+            </ul>
+        </div>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <script>
+            let searchBtn = document.querySelector('.searchBtn');
+            let closeBtn = document.querySelector('.closeBtn');
+            let searchBox = document.querySelector('.searchBox');
+            let profileBtn = document.querySelector('.profile-img');
+            let profileBox = document.querySelector('.profile-dropdown');
+            isOpen = false;
+            
+            profileBtn.onclick = function(){
+                if (isOpen){
+                    profileBox.classList.remove('active');
+                    isOpen = false;
+                } else {
+                    profileBox.classList.add('active');
+                    isOpen = true;
+                }
+            }
+
+            searchBtn.onclick = function(){
+                searchBox.classList.add('active');
+                closeBtn.classList.add('active');
+                searchBtn.classList.add('active');
+            }
+            closeBtn.onclick = function(){
+                searchBox.classList.remove('active');
+                closeBtn.classList.remove('active');
+                searchBtn.classList.remove('active');
+            }
+
+        </script>
+        
+        <div style="height: 110px;">
+
+        </div>
+
+        {% block content %}{% endblock %}
+
+        <!-- <div style="height: 40;"></div> -->
+    </body>
+
+        
+    
+</html>

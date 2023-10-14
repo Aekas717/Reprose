@@ -1,0 +1,56 @@
+{% extends "website_template.html" %}
+{% load static %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="flex-container">
+    <div class="column1">
+        <img src="https://drive.google.com/uc?id=13GJVOpa8BAhlsGvDtYp4OSMTBxeHkpeM" class="center"></img>
+    </div>
+
+    <div class="column2" style="padding-left: 50px">
+        <h5 class="quote">“A room without books is like a body without a soul.” ― <i>Cicero</i></h5>
+    </div>
+</div>
+
+
+<br>
+<br>
+<h3 class="BestSelling">Best Selling</h3>
+<div style="width: 100%; float: left;">
+    <a href="/listing/" class = 'seemore' style="padding-left: 0%;"> See more &gt </a>
+</div>
+<br><br><br><br>
+    <div class = 'grid'>
+        {% for book in context.listings %}
+            
+                <div id="box" class="grid-item" onclick="location.href='/bookinfo/'+'{{book.id}}'">
+                    <div class="card">
+                        <img class="card-img" src="{{book.imgurl}}" alt="book {{book.id}}">
+                        <div class="card-content">
+                            <h1 class="card-header"> {{book.book_title}} </h1>
+                            <p class="card-text">
+                                {{book.genre}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+            {% endfor %}
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    
+{% endblock %}
+
+
