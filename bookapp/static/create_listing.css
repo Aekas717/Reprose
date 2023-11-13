@@ -1,0 +1,86 @@
+body {
+    background: #9ecec3;
+    font-family: Futura, "Trebuchet MS";
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.listing-box {
+    position: absolute;
+    top: 25%;
+    left: 10%;
+    width: 80%;
+    background: transparent;
+    padding: 3%;
+    border: 1px solid #3c3c3c;
+    display: flex;
+    flex-direction: row;
+}
+
+.left-listing-box {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding-right: 10%;
+    border-right: 1px solid grey;
+}
+
+.right-listing-box {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin-left: 10%;
+}
+
+.dropdown, .text-field, .file-upload-label {
+    height: 8vh;
+    margin-bottom: 10%;
+    padding: 0 2%;
+    background: transparent;
+    border: 1px solid #3c3c3c;
+}
+
+.hlsl {
+    height: 8vh;
+    margin-bottom: 10%;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hlsl input {
+    display: none;
+}
+
+.hl-sl-label {
+    border: 1px solid #3c3c3c;
+    line-height: 7.5vh;
+    height: 8vh;
+    width: 50%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.hl-sl-label:last-of-type {
+    border-left: none;
+}
+
+.hl-sl:checked + .hl-sl-label {
+    background: #3c3c3c;
+    color: #9ecec3;
+}
+
+.file-upload {
+    display: none;
+}
+
+.file-upload-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}

@@ -35,7 +35,7 @@ body {
     padding: 2%;
     overflow-y: hidden;
     overflow-x: scroll;
-    background: #e9e9e9;
+    background: #EDEDED;
 }
 
 .grid-item {
@@ -170,7 +170,7 @@ p {
 .quote {
     font-size: 350%; /*dont change this */
     font-weight: 600;
-    background-image: linear-gradient(to left, #553c9a, #b393d3);
+    background-image: linear-gradient(to left, #202D5E, #3C54AE);
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
@@ -181,7 +181,7 @@ p {
 .BestSelling {
     font-size: 48px; /*dont change this */
     font-weight: 600;
-    background-image: linear-gradient(to left, #553c9a, #b393d3);
+    background-image: linear-gradient(to left, #202D5E, #3C54AE);
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;

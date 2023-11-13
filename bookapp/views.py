@@ -631,9 +631,7 @@ def browse_listings(request):
 def add_listing(request):
     csrf_token = get_token(request)
     if 'user_login' in request.session:
-
         name = users.objects.get(id=request.session['user_login']).firstname
-
         context = {
             "ishidden": "hidden",
             "isnothidden": "",
@@ -644,35 +642,12 @@ def add_listing(request):
             "name": name,
         }
         if request.method == "POST":
-
             isbn = request.POST["isbn"].replace("-","")
-
             bookdata = get_book_info_from_isbn(isbn)
-            book_title = bookdata[0]
-            genre = bookdata[2][0]
-            if bookdata[4] == 'NOT_MATURE':
-                age = 18
-            else:
-                age = 13
-            imgurl = bookdata[5]
-            description = bookdata[1]
-            saleOrBorrow = request.POST["listingType"]
-            price = request.POST["price"]
-            condition = request.POST['condition']
-            try:
-                data = Listings(userid=request.session['user_login'], book_title=book_title, isbn=isbn,
-                                genre=genre, age_group=age, saleOrBorrow=saleOrBorrow, price=price, imgurl=imgurl, description=description, condition=condition, times_viewed=0, borrowed_date=0)
-                data.save()
-            except ValueError:
-                price = 0
-                data = Listings(userid=request.session['user_login'], book_title=book_title, isbn=isbn,
-                                genre=genre, age_group=age, saleOrBorrow=saleOrBorrow, price=price, imgurl=imgurl, description=description, condition=condition, times_viewed=0, borrowed_date=0)
-                data.save()
-            return redirect('search')
         else:
             renderdata = {}
             renderdata['context'] = context
-            template = loader.get_template('add_listing.html')
+            template = loader.get_template('create_listing.html')
             return HttpResponse(template.render(renderdata, request))
     else:
         return redirect('login')
@@ -1065,3 +1040,33 @@ def payment(request, userid):
 
 def chat(request, userid):
     return HttpResponse()
+
+def notes_listings(request, grp):
+    csrf_token = get_token(request)
+
+    subjects = {
+        1: ["Language A: literature", "Language A: language and literature", "Literature and performance"],
+        2: ["Language Ab initio", "Language B"],
+        3: ["Business management", "Digital society", "Economics", "Geography", "Global politics", "History", "Language and culture", "Philosophy", "Psychology", "Social and cultural anthropology", "World religions"],
+        4: ["Biology", "Chemistry", "Computer science", "Design technology", "Enivronmental systems and societies", "Physics", "Sports, exercise and health science"],
+        5: ["Analysis and approaches", "Applications and interpretation"],
+        6: ["Dance", "Film", "Music", "Theatre", "Visual arts"]
+    }
+
+    group = subjects[int(grp)] 
+
+    context = {
+        "csrf_token": csrf_token,
+        "home_class": "active",
+        "about_class": "inactive",
+        "contact_class": "inactive",
+        "ishidden": "",
+        "isnothidden": "hidden",
+        "subjects": group,
+    }
+
+    renderdata = {}
+    renderdata['context'] = context
+    template = loader.get_template('notes.html')
+
+    return HttpResponse(template.render(renderdata, request))

@@ -14,8 +14,27 @@ html {
     display: none;
 }
 
+/* Below is the code to get dark mode header */
 header {
     font-size: 160%;
+    background: #2a3f8dab;
+    color: #ffffcc;
+}
+
+header ul li a {
+    color: #ffffcc;
+}
+
+header ul li a::before {
+    background: #ffffcc;
+}
+
+.logo {
+    color: #ffffcc;
+}
+
+.dropdown .dropbtn {
+    color: #ffffcc;
 }
 
 .profile-dropdown {
@@ -29,7 +48,7 @@ body {
     align-items: center;
     min-height: 100vh;
     padding-right: 62px;
-    background: #9ecec3;
+    background: #202D5E;
     /* background: #ededed; */
 }
 

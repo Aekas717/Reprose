@@ -17,6 +17,21 @@
             <div class="group">
                 <ul class="navigation">
                     <li ><a href="/">Home</a></li>
+                        <div class="navbar">
+                          <div class="dropdown">
+                            <button class="dropbtn">NOTES
+                              <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-content">
+                              <a href="/notes/1">Group 1 Subjects</a>
+                              <a href="/notes/2">Group 2 Subjects</a>
+                              <a href="/notes/3">Group 3 Subjects</a>
+                              <a href="/notes/4">Group 4 Subjects</a>
+                              <a href="/notes/5">Group 5 Subjects</a>
+                              <a href="/notes/6">Group 6 Subjects</a>
+                            </div>
+                          </div> 
+                        </div>
                     <li><a href="/listing">Browse</a></li>
                     <li><a href="/about">About</a></li>
                     <li {{context.ishidden }}><a href="/login">Login</a></li>
@@ -57,6 +72,10 @@
                 </div>
                 <div class="item-list">
                     <li class="profile-list-item"><a class="link" href="/cart/">View Cart</a></li>
+                    <div class="">&gt</div>
+                </div>
+                <div class="item-list">
+                    <li class="profile-list-item"><a class="link" href="/cart/">Settings</a></li>
                     <div class="">&gt</div>
                 </div>
                 <div class="item-list">

@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Below is the code to get dark mode header */
+header {
+    font-size: 160%;
+    background: #2a3f8dab;
+    color: #ffffcc;
+}
+
+header ul li a {
+    color: #ffffcc;
+}
+
+header ul li a::before {
+    background: #ffffcc;
+}
+
+.logo {
+    color: #ffffcc;
+}
+
+.dropdown .dropbtn {
+    color: #ffffcc;
+}
+
+.profile-dropdown {
+    
+}
+
+body {
+    /* background-color: #9ecec3; */
+    font-family: "Poppins", sans-serif;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-right: 62px;
+    background: #202D5E;
+    /* background: #ededed; */
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.subject-icon {
+    font-size: 24px; /* Adjust the icon size as needed */
+    margin-right: 10px;
+}
+
+.subject-name {
+    font-size: 18px;
+}

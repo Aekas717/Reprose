@@ -1,0 +1,62 @@
+{% extends "website_template.html" %}
+
+{% block title %}
+    Add Listing
+{% endblock %}
+
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'create_listing.css' %}">
+{% endblock %}
+
+{% block content %}
+    <form method="post" action="#" class="listingform">
+    {% csrf_token %}
+    <div class="listing-box">
+            <div class="left-listing-box">
+                <select class="dropdown" id="subject-grp" name="subject-grp" required>
+                    <option value="">Subject Group</option>
+                    <option id="grp1" value="First Language">Group 1: First Language</option>
+                    <option id="grp2" value="Second Language">Group 2: Second Language</option>
+                    <option id="grp3" value="Humanities">Group 3: Humanities</option>
+                    <option id="grp4" value="Sciences">Group 4: Sciences</option>
+                    <option id="grp5" value="Mathematics">Group 5: Mathematics</option>
+                    <option id="grp6" value="Arts">Group 6: Arts</option>
+                </select>
+                <select class="dropdown" id="subject" name="subject" required>
+                    <option value="">Subject</option>
+                    <option id="Physics" value="Physics">Physics</option>
+                    <option id="Chemistry" value="Chemistry">Chemistry</option>
+                    <option id="Biology" value="Biology">Biology</option>
+                    <option id="Computer Science" value="Computer Science">Computer Science</option>
+                    <option id="Design Technology" value="Design Technology">Design Technology</option>
+                    <option id="Sports Science" value="Sports Science">Sports Science</option>
+                </select>
+                <div class="hlsl">
+                    <input class="hl-sl" type="radio" name="level" id="HL" value="HL">
+                    <label class="hl-sl-label" for="HL">HL</label>
+                    <input class="hl-sl" type="radio" name="level" id="SL" value="SL">
+                    <label class="hl-sl-label" for="SL">SL</label>
+                </div>
+                <input type="number" class="text-field" placeholder="isbn">
+            </div>
+            <div class="right-listing-box">
+                <select class="dropdown" id="condition" name="condition" required>
+                    <option value="">Condition</option>
+                    <option value="Brand New">Brand New</option>
+                    <option value="Like new">Used - Like New</option>
+                    <option value="Slight Wear">Used - Slight Wear</option>
+                    <option value="Worn Out">Used - Worn Out</option>
+                </select>
+                <select class="dropdown" id="listingType" name="listingType" onchange="OpsLending()" required>
+                    <option value="">Listing type</option>
+                    <option id="Selling" value="For Sale">For Sale</option>
+                    <option id="borrow" value="To Borrow">For Lending</option>
+                </select>
+                <input type="number" class="text-field" placeholder="price">
+                <input type="file" id="file-upload" class="file-upload">
+                <label class="file-upload-label" for="file-upload">Upload a photo</label>
+            </div>
+        </div>
+    </form>
+{% endblock %}

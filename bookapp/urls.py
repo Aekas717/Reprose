@@ -24,4 +24,5 @@ urlpatterns = [
     path('cart/', views.cart, name='cart'),
     path('cart/checkout/<str:userid>', views.checkout, name='checkout'),
     path('payment/<str:userid>', views.payment, name='payment'),
+    path('notes/<str:grp>/', views.notes_listings, name='notes'),
 ]
